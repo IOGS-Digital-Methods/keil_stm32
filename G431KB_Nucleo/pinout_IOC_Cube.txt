@@ -22,3 +22,6 @@ PB3-4-5		SPI1
 
 PB7-PA15	I2C1
 
+Clocks
+------
+TIMER - 170 MHz / 2 = 85 MHz

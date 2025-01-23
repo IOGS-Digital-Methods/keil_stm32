@@ -20,6 +20,8 @@
 #include "tim.h"
 
 /* ISR for TIM2 timer */
+// ARR = 10 / PSC = 4250 / F_CLK = 85 MHz
+// f_TIM2 = F_CLK / ((ARR+1)(PSC+1))
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 	HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_6);
 }
@@ -36,6 +38,8 @@ int main(void)
 
 	/* User Initialization*/
 	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_8, GPIO_PIN_SET);
+	change_TIM2_PSC(1);
+	change_TIM2_ARR(1);
 	
 	/* Start Timer TIM2 */
 	HAL_TIM_Base_Start_IT(&htim2);

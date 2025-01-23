@@ -44,6 +44,24 @@ void initMCU(void){
   //MX_TIM17_Init();
 }
 
+
+/**
+  * @brief Change TIM2 Timer Prescaler
+  */
+void change_TIM2_PSC(int val){
+	htim2.Init.Prescaler = val;
+	HAL_TIM_Base_Init(&htim2);
+}
+
+/**
+  * @brief Change TIM2 Timer Period
+  */
+void change_TIM2_ARR(int val){
+	htim2.Init.Period = val;
+	HAL_TIM_Base_Init(&htim2);
+}
+
+
 /**
   * @brief System Clock Configuration
   * @retval None

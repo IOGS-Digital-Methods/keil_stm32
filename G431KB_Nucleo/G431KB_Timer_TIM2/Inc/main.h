@@ -29,32 +29,11 @@ extern "C" {
 /* Includes ------------------------------------------------------------------*/
 #include "stm32g4xx_hal.h"
 
-/* Private includes ----------------------------------------------------------*/
-/* USER CODE BEGIN Includes */
 
-/* USER CODE END Includes */
-
-/* Exported types ------------------------------------------------------------*/
-/* USER CODE BEGIN ET */
-
-/* USER CODE END ET */
-
-/* Exported constants --------------------------------------------------------*/
-/* USER CODE BEGIN EC */
-
-/* USER CODE END EC */
-
-/* Exported macro ------------------------------------------------------------*/
-/* USER CODE BEGIN EM */
-
-/* USER CODE END EM */
 
 /* Exported functions prototypes ---------------------------------------------*/
 void Error_Handler(void);
 
-/* USER CODE BEGIN EFP */
-
-/* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
 #define USART2_TX_Pin GPIO_PIN_2
@@ -72,6 +51,17 @@ void Error_Handler(void);
 
 void SystemClock_Config(void);
 void initMCU(void);
+
+/**
+  * @brief Change TIM2 Timer Prescaler
+  */
+void change_TIM2_PSC(int val);
+
+/**
+  * @brief Change TIM2 Timer Period
+  */
+void change_TIM2_ARR(int val);
+
 
 /* USER CODE END Private defines */
 

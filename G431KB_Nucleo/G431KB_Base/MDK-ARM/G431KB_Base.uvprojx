@@ -53,8 +53,8 @@
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>1</CreateHexFile>
-          <DebugInformation>1</DebugInformation>
-          <BrowseInformation>1</BrowseInformation>
+          <DebugInformation>0</DebugInformation>
+          <BrowseInformation>0</BrowseInformation>
           <ListingPath></ListingPath>
           <HexFormatSelection>1</HexFormatSelection>
           <Merge32K>0</Merge32K>
@@ -140,8 +140,8 @@
           <Flash2>BIN\UL2V8M.DLL</Flash2>
           <Flash3>"" ()</Flash3>
           <Flash4></Flash4>
-          <pFcarmOut></pFcarmOut>
-          <pFcarmGrp></pFcarmGrp>
+          <pFcarmOut>main.c</pFcarmOut>
+          <pFcarmGrp>Main</pFcarmGrp>
           <pFcArmRoot></pFcArmRoot>
           <FcArmLst>0</FcArmLst>
         </Utilities>
@@ -395,11 +395,6 @@
           <GroupName>Application/User</GroupName>
           <Files>
             <File>
-              <FileName>main.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../Src/main.c</FilePath>
-            </File>
-            <File>
               <FileName>gpio.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Src/gpio.c</FilePath>
@@ -494,6 +489,11 @@
               <FileName>stm32g4xx_hal_msp.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Src/stm32g4xx_hal_msp.c</FilePath>
+            </File>
+            <File>
+              <FileName>main_func.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\main_func.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -634,6 +634,36 @@
               <FileName>system_stm32g4xx.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Src/system_stm32g4xx.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Docs</GroupName>
+          <Files>
+            <File>
+              <FileName>_readme.txt</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\_readme.txt</FilePath>
+            </File>
+            <File>
+              <FileName>g431KB.png</FileName>
+              <FileType>9</FileType>
+              <FilePath>..\..\g431KB.png</FilePath>
+            </File>
+            <File>
+              <FileName>pinout_IOC_Cube.txt</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\pinout_IOC_Cube.txt</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Main</GroupName>
+          <Files>
+            <File>
+              <FileName>main.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Main\main.c</FilePath>
             </File>
           </Files>
         </Group>

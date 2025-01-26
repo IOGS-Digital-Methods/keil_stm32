@@ -1,0 +1,14 @@
+Installation de Keil uVision dans c:\Keil_v5
+============================================
+
+
+Clone de MBED dans c:\Keil_v5\mbed-os
+=====================================
+
+	git clone https://github.com/ARMmbed/mbed-os.git
+	
+	Attention, dans le fichier /platform/source/mbed_sdk_boot.c - commenter ligne 141   mbed_error_initialize();  (fonction introuvable...)
+
+
+Récupération du projet de base
+==============================

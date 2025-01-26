@@ -12,3 +12,4 @@ Clone de MBED dans c:\Keil_v5\mbed-os
 
 Récupération du projet de base
 ==============================
+	Depuis de dépot GitHub : https://github.com/IOGS-Digital-Methods/keil_stm32 - fichier hello-mdk-mbed.zip (à décompresser)

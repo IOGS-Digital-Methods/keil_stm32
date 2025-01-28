@@ -1,10 +1,11 @@
 {
-	"requires": ["bare-metal"],
+    "requires": ["bare-metal"],
     "target_overrides": {
-        "*": {
-            "platform.stdio-baud-rate": 9600,
-			"platform.minimal-printf-enable-floating-point": false,
-			"platform.stdio-minimal-console-only": true
-        }
+      "*": {
+        "target.c_lib": "small",
+        "target.printf_lib": "minimal-printf",
+        "platform.minimal-printf-enable-floating-point": false,
+        "platform.stdio-minimal-console-only": true
+      }
     }
 }

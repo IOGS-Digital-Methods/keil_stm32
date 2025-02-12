@@ -1,1 +1,92 @@
-# Keil uVision, MBED-OS et NucléoCe document présente comment installer et utiliser **Keil uVision** (version 5.41) avec le système d'exploitation **mbed-os** (version 6.17) dans le cadre de la salle de Travaux Pratiques d'Interfaçage Numérique et de ProTIS à l'*Institut d'Optique Graduate School*.*Document rédigé par Julien VILLEMEJANE - LEnsE*## Installation de Keil uVisionTélécharger la version **5.41** de **MDK-ARM** depuis le site de *Keil* : [https://www.keil.com/](https://www.keil.com/)Installer la version 5.41 dans le répertoire **`C:\Keil_v5\`**.## Clonage du dépôt mbed-osLe dépôt GitHub de **mbed-os** se trouve à l'adresse suivante : [https://github.com/ARMmbed/](https://github.com/ARMmbed/)Depuis le répertoire **`C:\Keil_v5\`**, cloner le dépôt à l'aide de la commande :``git clone https://github.com/ARMmbed/mbed-os.git``**Attention**, dans la version 6.17, il faut commenter la ligne 141 (`mbed_error_initialize();`) du fichier `/platform/source/mbed_sdk_boot.c` (fonction introuvable...)## Utilisation de MBED-CliAfin de créer un projet propre pour une cible particulière, basé sur **mbed-os**, nous allons nous intéresser à l'application *mbed-cli* fourni par *ARM*. Cette application permet de créer de nouveau projet mbed pour des cartes Nucléo en particulier (d'autres plateformes sont également disponible).### Installation de MBED-CLIIl existe un package pour Python (version 3 de Python) qui s'installe à l'aide de la commande suivante : ``pip install mbed-cli``**Attention** D'autres packages sont indispensables au bon fonctionnement de *mbed-cli*. (liste à venir)### Création d'un nouveau projetNaviguer jusqu'au répertoire souhaité.Dans un terminal, exécuter la commande suivante (pour créer un projet nommé *hello-mdk* :``mbed new hello-mdk``Cette commande crée un projet incluant la dernière version de *mbed-os* (téléchargement un peu long...).### Ajout d'une cibleNaviguer dans le répertoire nouvellement créé du projet (*hello-mdk* dans l'exemple précédent).Exécuter la commande suivante pour associer une cible à votre projet (ici Nucleo L476RG) :``mbed target -m NUCLEO_L476RG``### Export du projet vers KeilAfin de créer les fichiers spécifiques à Keil, exécuter la commande suivante :## Adaptation du projetIl est possible de conserver cette version pour l'utilisation du projet **Keil uVision**, mais cela ajoute à chaque projet environ 1Go de bibliothèque *mbed-os*.Avec quelques modifications du projet créé, il est possible de se baser sur une version mutualisée de *mbed-os* (par exemple celle contenue dans le répertoire **`C:\Keil_v5\mbed-os\`**Vous allez pouvoir créer un projet de référence réutilisable.Supprimer le répertoire *mbed-os* du projet de référence (ici *hello-mdk*). Vous pouvez aussi supprimer les répertoires `.git`, `__pycache__` et les fichiers `GettingStarted.html` et `mbed_settings.py`.### Modification du fichier *.uvprojxAfin que votre projet Keil soit lié à la version de *mbed-os* déjà pré-installée, il faut modifier le fichier `nom_projet.uvprojx` du répertoire du projet à l'aide d'un éditeur de texte (type *Notepad* ou *Notepad++*).Remplacer toutes les occurrences de **`./mbed-os/`** par **`C:/Keil_v5/mbed-os/`** et sauvegarder le fichier `nom_projet.uvprojx`.Remplacer également toutes les occurrences de **`;mbed-os`** par **`;C:/Keil_v5/mbed-os`**### Lancement de Keil uVisionLancer à présent **Keil uVision** en double-cliquant sur le fichier `nom_projet.uvprojx`.*Attention* Certaines options de compilation peuvent être supprimées pour accélérer la compilation…*Liste ??*Vous pouvez alors ajouter un fichier `main.cpp` au projet (dans un répertoire déjà existant - celui portant le nom du projet - ou un nouveau répertoire).Dans ce fichier `main.cpp`, saisir la structure de base d'un programme mbed-os :```#include "mbed.h" DigitalOut led(LED1); int main(){ 	while (1) { 		led = !led; 		thread_sleep_for(50); 	} }```### CompilationAvant de compiler le projet, vous pouvez modifier le fichier **`mbed_app.json`** de la manière suivante : ```json{    "requires": ["bare-metal"],    "target_overrides": {        "*": {            "platform.stdio-baud-rate": 9600,            "platform.minimal-printf-enable-floating-point": false,            "platform.stdio-minimal-console-only": true        }    }}```
+# Keil uVision, MBED-OS et Nucléo
+
+Ce document présente comment installer et utiliser **Keil uVision** (version 5.41) avec le système d'exploitation **mbed-os** (version 6.17) dans le cadre de la salle de Travaux Pratiques d'Interfaçage Numérique et de ProTIS à l'*Institut d'Optique Graduate School*.
+
+*Document rédigé par Julien VILLEMEJANE - LEnsE*
+
+## Installation de Keil uVision
+
+Télécharger la version **5.41** de **MDK-ARM** depuis le site de *Keil* : [https://www.keil.com/](https://www.keil.com/)
+
+Installer la version 5.41 dans le répertoire **`C:\Keil_v5\`**.
+
+### Packages à installer
+
+Au premier lancement de l'application **Keil uVision**, l'outil de gestion des packages **Pack Installer** s'ouvre. Sinon, vous pouvez vous rendre sur cet outil en cliquant sur l'icône **Pack Installer**.
+
+Dans la zone de droite, cliquer sur l'onglet `Boards` et rechercher la carte Nucléo L476RG. Sélectionner le composant installé sur la carte : *STM32L476RGTx*. 
+
+Une fois sélectionnée, choisir l'installation des packages (en cliquant sur *Install* :
+
+- Keil::NUCLEO-L476RG_BSP
+- Keil::STM32L4xx_DFP
+- Keil::STM32NUCLEO_BSP
+
+*Ces paramètres doivent être adaptés en cas d'utilisation de cartes Nucléo différentes ou de composants STM32 différents.*
+
+### Licence Community-MDK6
+
+Dans **Keil uVision**, aller dans `File > License Management...` et sélectionner l'onblet `User-Based License`.
+
+Cliquer sur `Activate / Deactive...` pour ouvrir le gestionnaire de licence *Arm License Management Utility*.
+
+Cliquer sur `License Server...` et entrer *https://mdk-preview.keil.arm.com* comme serveur de licence. Cliquer sur `Query`. Selectionner `Keil MDK Community...` et appuyer sur `Activate`.
+
+
+Plus d'information à l'adresse suivante : [https://www.keil.arm.com/mdk-community/](https://www.keil.arm.com/mdk-community/)
+
+
+## Clonage du dépôt mbed-os
+
+Le dépôt GitHub de **mbed-os** se trouve à l'adresse suivante : [https://github.com/ARMmbed/](https://github.com/ARMmbed/)
+
+Depuis le répertoire **`C:\Keil_v5\`**, cloner le dépôt à l'aide de la commande :
+
+``git clone https://github.com/ARMmbed/mbed-os.git``
+
+Si vous n'avez pas le logiciel Git, il est possible de se rendre sur la page suivante : [https://github.com/ARMmbed/](https://github.com/ARMmbed/) et de télécharger le code (Code - bouton vert - puis Download Zip). Il faut ensuite décompresser le document archivé dans le répertoire **`C:\Keil_v5\`**.
+
+**Attention**, dans la version 6.17, il faut commenter la ligne 141 (`mbed_error_initialize();`) du fichier `/platform/source/mbed_sdk_boot.c` (fonction introuvable...)
+
+
+## Projet de base
+
+### Téléchargement
+
+Un projet de base, réalisé avec MBED-Cli, est disponible dans le répertoire suivant (dépôt Git) : 
+
+Une version archivée est disponible au téléchargement ici : [https://lense.institutoptique.fr/ressources/mbed/hello-L476RG.zip](https://lense.institutoptique.fr/ressources/mbed/hello-L476RG.zip)
+
+Décompresser l'archive dans un répertoire de votre ordinateur.
+
+### Utilisation
+
+Ce projet de base est prévu pour fonctionner avec des cartes **Nucléo L476RG** et le système d'exploitation **Mbed-OS** (version 6.14 et supérieure).
+
+Double-cliquer sur le fichier `hello-l476rg.uvprojx`. *(Vous pourrez renommer ce fichier par la suite.)*
+
+L'application **Keil uVision** se lance.
+
+Un fichier `main.cpp` est déjà présent dans le projet. Il est basé sur l'exemple *blinky-baremetal* de *mbed-os*.
+
+Structure de base du programme mbed-os :
+
+```
+#include "mbed.h" 
+
+DigitalOut led(LED1); 
+
+
+int main(){ 
+
+	while (1) { 
+		led = !led; 
+		thread_sleep_for(50); 
+	} 
+}
+```
+
+### Ajout de bibliothèques
+
+Dossier `libs`
+

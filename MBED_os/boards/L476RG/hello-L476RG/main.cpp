@@ -2,7 +2,7 @@
  *  Structure of a main file for embedded project @ LEnsE
  *      Blinky on L476RG
  *
- *  This code allows to get the distance from an ultrasound sensor. 
+ *  This code allows to toggle the onboard LED at a period of 0.4s. 
  *****************************************************************
  *  Pinout :
  *      LED1 - LD2 on Nucleo-L476RG

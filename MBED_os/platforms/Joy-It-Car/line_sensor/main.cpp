@@ -19,7 +19,7 @@
 
 #include "mbed.h"
 
-InterruptIn		line_R(PA_6);
+InterruptIn		line_R(PB_12);
 InterruptIn		line_C(PB_6);
 InterruptIn		line_L(PA_7);
 
